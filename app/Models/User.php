@@ -48,4 +48,8 @@ class User extends Authenticatable
         return "/storage/" . $imagePath;
     }
 
+    public function posts(){
+        return $this->hasMany(Post::class)->orderBy('created_at', 'DESC');
+    }
+
 }
