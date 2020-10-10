@@ -12,9 +12,10 @@ class UsersController extends Controller
     {
         $requested_user = $request->user();
         $url_user_arg = User::findOrFail($url_user_arg);
+        $posts = $url_user_arg->posts;
 //        dd($requested_user->name);
 //        dd($url_user_arg);
-        return view('users.index', compact('requested_user', 'url_user_arg'));
+        return view('users.index', compact('requested_user', 'url_user_arg', 'posts'));
     }
 
     public function edit(User $user){
