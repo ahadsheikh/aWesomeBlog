@@ -22,6 +22,9 @@
                     </div>
                     <div class="col-6 font-weight-bold" style="align-self: center; font-size: 25px">
                         <a href="/user/{{ $post->user->id }}">{{ $post->user->name }}</a>
+                        <div>
+                            <p style="font-size: 13px">{{ $post->created_at->diffForHumans() }}</p>
+                        </div>
                     </div>
                 </div>
                 <div class="row">

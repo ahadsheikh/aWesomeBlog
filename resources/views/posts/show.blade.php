@@ -9,6 +9,9 @@
                 </div>
                 <div class="col align-items-baseline font-weight-bold">
                     <a href="/user/{{ $post->user->id }}" style="font-size: 25px">{{ $post->user->name }}</a>
+                    <div>
+                        <p style="font-size: 13px">{{ $post->created_at->diffForHumans() }}</p>
+                    </div>
                 </div>
                 @if(auth()->check())
                     @if(auth()->user()->id == $post->user->id)
