@@ -11,10 +11,12 @@
             <div class="col-sm-8 my-col">
                <div>{{ $url_user_arg->name }}</div>
                 <div>{{ $url_user_arg->bio }}</div>
-                @if($url_user_arg->id == $requested_user->id)
-                    <div>
-                        <a href="/user/{{ auth()->user()->id }}/edit">Edit Profile</a>
-                    </div>
+                @if(auth()->check())
+                    @if($url_user_arg->id == $requested_user->id)
+                        <div>
+                            <a href="/user/{{ auth()->user()->id }}/edit">Edit Profile</a>
+                        </div>
+                    @endif
                 @endif
 
             </div>

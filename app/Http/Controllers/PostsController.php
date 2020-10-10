@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\File;
 class PostsController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['index','show']);
     }
     /**
      * Display a listing of the resource.
@@ -126,7 +126,7 @@ class PostsController extends Controller
             $post->update($data);
         }
 //        dd($data);
-        return redirect('/posts');
+        return redirect("/posts/$post->id/edit")->with('success', "Post Updated.");
     }
 
     /**
@@ -137,6 +137,9 @@ class PostsController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $this->authorize('delete', $post);
+//        dd($post);
+        $post->delete();
+        return redirect('/posts')->with('success', 'Post Deleted.');
     }
 }

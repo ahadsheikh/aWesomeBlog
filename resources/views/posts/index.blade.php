@@ -2,30 +2,37 @@
 
 @section('content')
     <div class="container">
-        <div class="row pb-4">
-            <div class="pl-lg-4">
-                <a href="/posts/create">Add Post</a>
+        @if(\Illuminate\Support\Facades\Session::has('success'))
+            <div class="alert alert-danger">
+                <h4>{{ \Illuminate\Support\Facades\Session::get('success') }}</h4>
             </div>
-        </div>
+        @endif
+        @if(auth()->check())
+            <div class="row pb-4">
+                <div class="pl-3">
+                    <a href="/posts/create" class="btn btn-primary">Add Post</a>
+                </div>
+            </div>
+        @endif
         @foreach($posts as $post)
-            <div class="pb-5">
+            <div class="mb-5">
                 <div class="row">
                     <div class="col-1">
                         <img class="rounded-circle img-thumbnail" src="{{ $post->user->profileImage() }}" alt="">
                     </div>
-                    <div class="col-6 align-items-baseline font-weight-bold">
+                    <div class="col-6 font-weight-bold" style="align-self: center; font-size: 25px">
                         <a href="/user/{{ $post->user->id }}">{{ $post->user->name }}</a>
                     </div>
                 </div>
-                <div class="row pt-2">
+                <div class="row">
                     <div class="col pl-4">
-                        <a class="font-weight-bold" href="/posts/{{ $post->id }}">{{ $post->title }}</a>
+                        <a class="font-weight-bold" style="font-size: 20px" href="/posts/{{ $post->id }}">{{ $post->title }}</a>
                     </div>
                 </div>
                 @if($post->content)
-                    <div class="row pt-2 pb-4">
+                    <div class="row pl-2">
                         <div class="col">
-                            <p>
+                            <p style="font-size: 16px">
                                 {{ $post->content }}
                             </p>
                         </div>
@@ -33,9 +40,9 @@
                 @endif
                 @if($post->image)
                     <div class="row">
-                        <div class="col">
-                            <a href="#">
-                                <img src="/storage/{{ $post->image }}" alt="" class="w-100" style="width: 500px;">
+                        <div class="col pl-4">
+                            <a href="/posts/{{ $post->id }}">
+                                <img src="/storage/{{ $post->image }}" alt="" width="400px">
                             </a>
                         </div>
                     </div>
