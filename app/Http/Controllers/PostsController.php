@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class PostsController extends Controller
 {
@@ -78,7 +79,8 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $this->authorize('update', $post);
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -90,7 +92,40 @@ class PostsController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $this->authorize('update', $post);
+
+        $data = $request->validate([
+            'title' => 'required',
+            'content' => '',
+            'image' => 'image'
+        ]);
+
+        if(isset($data['image'])){
+            if($post->image){
+//                dd($post->image);
+                $storage_path = storage_path();
+                $old_image_path = "$storage_path/app/public/$post->image";
+//                dd($old_image_path);
+                if(File::exists($old_image_path)){
+                    File::delete($old_image_path);
+                }
+                else{
+                    dd('file not exists');
+                }
+            }
+            $imagePath = $data['image']->store('posts_image', 'public');
+            $post->update([
+                'title' => $data['title'],
+                'content' => $data['content'],
+                'image' => $imagePath
+            ]);
+        }
+        else{
+//            dd('image not added');
+            $post->update($data);
+        }
+//        dd($data);
+        return redirect('/posts');
     }
 
     /**

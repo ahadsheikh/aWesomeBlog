@@ -35,7 +35,7 @@
                     <div class="row">
                         <div class="col">
                             <a href="#">
-                                <img src="/storage/{{ $post->image }}" alt="" class="w-100">
+                                <img src="/storage/{{ $post->image }}" alt="" class="w-100" style="width: 500px;">
                             </a>
                         </div>
                     </div>
