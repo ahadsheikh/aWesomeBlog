@@ -18,7 +18,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('created_at', 'DESC')->get();
         return view('posts.index', compact('posts'));
     }
 
@@ -68,7 +68,8 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        //
+//        dd('ahad');
+        return view('posts.show', compact('post'));
     }
 
     /**

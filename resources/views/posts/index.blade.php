@@ -14,12 +14,12 @@
                         <img class="rounded-circle img-thumbnail" src="{{ $post->user->profileImage() }}" alt="">
                     </div>
                     <div class="col-6 align-items-baseline font-weight-bold">
-                        <a href="#">{{ $post->user->name }}</a>
+                        <a href="/user/{{ $post->user->id }}">{{ $post->user->name }}</a>
                     </div>
                 </div>
                 <div class="row pt-2">
                     <div class="col pl-4">
-                        <a class="font-weight-bold">{{ $post->title }}</a>
+                        <a class="font-weight-bold" href="/posts/{{ $post->id }}">{{ $post->title }}</a>
                     </div>
                 </div>
                 @if($post->content)
