@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -12,7 +13,8 @@ class UsersController extends Controller
     {
         $requested_user = $request->user();
         $url_user_arg = User::findOrFail($url_user_arg);
-        $posts = $url_user_arg->posts;
+//        $posts = $url_user_arg->posts->simplePaginate();
+        $posts = Post::whereIn('user_id', $url_user_arg)->latest()->simplePaginate(2);
 //        dd($requested_user->name);
 //        dd($url_user_arg);
         return view('users.index', compact('requested_user', 'url_user_arg', 'posts'));
