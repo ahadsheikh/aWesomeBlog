@@ -2,11 +2,6 @@
 
 @section('content')
     <div class="container">
-        @if(\Illuminate\Support\Facades\Session::has('success'))
-            <div class="alert alert-danger">
-                <h4>{{ \Illuminate\Support\Facades\Session::get('success') }}</h4>
-            </div>
-        @endif
         @if(auth()->check())
             <div class="row pb-4">
                 <div class="pl-3">

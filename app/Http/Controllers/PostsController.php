@@ -57,7 +57,9 @@ class PostsController extends Controller
             'image' => $imagePath
         ]);
 
-        return redirect('/posts');
+        $user = auth()->user()->id;
+
+        return redirect("/user/$user");
     }
 
     /**
@@ -110,9 +112,6 @@ class PostsController extends Controller
                 if(File::exists($old_image_path)){
                     File::delete($old_image_path);
                 }
-                else{
-                    dd('file not exists');
-                }
             }
             $imagePath = $data['image']->store('posts_image', 'public');
             $post->update([
@@ -138,8 +137,15 @@ class PostsController extends Controller
     public function destroy(Post $post)
     {
         $this->authorize('delete', $post);
-//        dd($post);
+        $post_user = $post->user->id;
+        if(isset($post->image)){
+            $storage_path = storage_path();
+            $old_image_path = "$storage_path/app/public/$post->image";
+            if(File::exists($old_image_path)){
+                File::delete($old_image_path);
+            }
+        }
         $post->delete();
-        return redirect('/posts')->with('success', 'Post Deleted.');
+        return redirect("/user/$post_user")->with('success', 'Post Deleted.');
     }
 }
