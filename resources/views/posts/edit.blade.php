@@ -8,7 +8,7 @@
             </div>
         @endif
         <div class="card">
-            <div class="card-header">Profile Update</div>
+            <div class="card-header">Post Update</div>
 
             <div class="card-body">
                 <form method="POST" action="/posts/{{ $post->id }}" enctype="multipart/form-data">
