@@ -20,7 +20,7 @@ class CommentsController extends Controller
     public function store(Request $request, $post_id)
     {
         $data = $request->validate([
-            'content' => 'required'
+            'content' => 'required|max:500'
         ]);
         $user_id = auth()->user()->id;
 

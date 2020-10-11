@@ -26,9 +26,9 @@ class UsersController extends Controller
     public function update(User $user){
         $this->authorize('update', $user);
         $data = request()->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'bio' => '',
+            'name' => 'required|max:50',
+            'email' => 'required|email|max:100',
+            'bio' => 'max:200',
             'image' => 'image|max:2048'
         ]);
         $imagePath = '';

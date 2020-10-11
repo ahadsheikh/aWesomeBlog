@@ -42,8 +42,8 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required',
-            'content' => '',
+            'title' => 'required|max:200',
+            'content' => 'max:2000',
             'image' => 'image|max:2048'
         ]);
 
@@ -102,8 +102,8 @@ class PostsController extends Controller
         $user = $post->user;
 
         $data = $request->validate([
-            'title' => 'required',
-            'content' => '',
+            'title' => 'required|max:200',
+            'content' => 'max:2000',
             'image' => 'image|max:1024'
         ]);
 
