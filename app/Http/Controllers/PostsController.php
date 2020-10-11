@@ -71,7 +71,8 @@ class PostsController extends Controller
     public function show(Post $post)
     {
 //        dd('ahad');
-        return view('posts.show', compact('post'));
+        $comments = $post->comments;
+        return view('posts.show', compact('post', 'comments'));
     }
 
     /**

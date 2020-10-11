@@ -44,4 +44,7 @@ Route::resources([
     'posts' => PostsController::class,
 ]);
 
+// Comment Routes
+Route::post('/comments/{post_id}', [\App\Http\Controllers\CommentsController::class, 'store'])->name('comments.store');
+Route::delete('/comments/{comment}', [\App\Http\Controllers\CommentsController::class, 'destroy'])->name('comments.destroy');
 
