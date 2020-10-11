@@ -44,7 +44,7 @@ class PostsController extends Controller
         $data = $request->validate([
             'title' => 'required',
             'content' => '',
-            'image' => 'image'
+            'image' => 'image|max:2048'
         ]);
 
         // image saving in the storage
@@ -103,7 +103,7 @@ class PostsController extends Controller
         $data = $request->validate([
             'title' => 'required',
             'content' => '',
-            'image' => 'image'
+            'image' => 'image|max:1024'
         ]);
 
         if(isset($data['image'])){

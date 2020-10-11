@@ -29,7 +29,7 @@ class UsersController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'bio' => '',
-            'image' => ''
+            'image' => 'image|max:2048'
         ]);
         $imagePath = '';
         if(request('image')){

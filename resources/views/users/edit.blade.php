@@ -23,9 +23,13 @@
                                            required autocomplete="name" autofocus>
 
                                     @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                     @enderror
                                 </div>
                             </div>
@@ -42,9 +46,13 @@
                                            required autocomplete="email">
 
                                     @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                     @enderror
                                 </div>
                             </div>
@@ -61,44 +69,17 @@
                                            autocomplete="bio">
 
                                     @error('bio')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                     @enderror
                                 </div>
                             </div>
 
-{{--                            <div class="form-group row">--}}
-{{--                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>--}}
-
-{{--                                <div class="col-md-6">--}}
-{{--                                    <input id="password"--}}
-{{--                                           type="password"--}}
-{{--                                           class="form-control @error('password') is-invalid @enderror"--}}
-{{--                                           name="password"--}}
-{{--                                           value="{{ old('password') ?? $user->password }}"--}}
-{{--                                           required autocomplete="new-password">--}}
-
-{{--                                    @error('password')--}}
-{{--                                    <span class="invalid-feedback" role="alert">--}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                    @enderror--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-
-{{--                            <div class="form-group row">--}}
-{{--                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>--}}
-
-{{--                                <div class="col-md-6">--}}
-{{--                                    <input id="password-confirm" --}}
-{{--                                           type="password" --}}
-{{--                                           class="form-control" --}}
-{{--                                           name="password_confirmation" --}}
-{{--                                           required autocomplete="new-password">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
 
                             <div class="form-group row">
                                 <label for="image" class="col-md-4 col-form-label text-md-right">Image</label>
@@ -107,9 +88,13 @@
                                     <input id="image" type="file" class="form-control-file" name="image">
 
                                     @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                     @enderror
                                 </div>
                             </div>
