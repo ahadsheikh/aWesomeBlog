@@ -17,7 +17,7 @@
                 <h3>{{ $user->name }}</h3>
                 <p style="font-size: 18px">{{ $user->bio }}</p>
                 @if(auth()->check())
-                    @if($user->id == $requested_user->id)
+                    @if(auth()->user()->id === $user->id)
                         <div>
                             <a class="btn btn-primary" href="/user/{{ auth()->user()->id }}/edit">Edit Profile</a>
                         </div>
