@@ -9,11 +9,12 @@ use Illuminate\Support\Facades\Gate;
 
 class UsersController extends Controller
 {
-    public function index(Request $request, $url_user_arg)
+    public function index(Request $request, $user_id)
     {
-        $user = auth()->user()->id;
-        $posts = Post::where('user_id', $user)->latest()->simplePaginate(15);
-        return view('users.index', compact('requested_user', 'url_user_arg', 'posts'));
+        $requested_user = $request->user();
+        $posts = Post::where('user_id', $user_id)->latest()->simplePaginate(15);
+        $user = User::findOrFail($user_id);
+        return view('users.index', compact('requested_user', 'user', 'posts'));
     }
 
     public function edit(User $user){

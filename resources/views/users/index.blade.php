@@ -10,21 +10,21 @@
         <div class="row">
             <div class="col-sm-4">
                 <div>
-                    <img src="{{ $url_user_arg->profileImage()  }}" alt="" style="width: 300px">
+                    <img src="{{ $user->profileImage()  }}" alt="" style="width: 300px">
                 </div>
             </div>
             <div class="col-sm-8">
-                <h3>{{ $url_user_arg->name }}</h3>
-                <p style="font-size: 18px">{{ $url_user_arg->bio }}</p>
+                <h3>{{ $user->name }}</h3>
+                <p style="font-size: 18px">{{ $user->bio }}</p>
                 @if(auth()->check())
-                    @if($url_user_arg->id == $requested_user->id)
+                    @if($user->id == $requested_user->id)
                         <div>
                             <a class="btn btn-primary" href="/user/{{ auth()->user()->id }}/edit">Edit Profile</a>
                         </div>
                     @endif
                 @endif
                 @if(auth()->check())
-                    @if(auth()->user()->id === $url_user_arg->id)
+                    @if(auth()->user()->id === $user->id)
                         <div class="row pb-4 pt-3">
                             <div class="pl-3">
                                 <a href="/posts/create" class="btn btn-primary">Add Post</a>
