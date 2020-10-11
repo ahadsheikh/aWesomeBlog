@@ -99,6 +99,7 @@ class PostsController extends Controller
     public function update(Request $request, Post $post)
     {
         $this->authorize('update', $post);
+        $user = $post->user;
 
         $data = $request->validate([
             'title' => 'required',
@@ -128,7 +129,7 @@ class PostsController extends Controller
             $post->update($data);
         }
 
-        return redirect("/posts/$post->id/edit")->with('success', "Post Updated.");
+        return redirect("/posts/$post->id")->with('success', "Post Updated.");
     }
 
     /**
