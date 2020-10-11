@@ -11,12 +11,8 @@ class UsersController extends Controller
 {
     public function index(Request $request, $url_user_arg)
     {
-        $requested_user = $request->user();
-        $url_user_arg = User::findOrFail($url_user_arg);
-//        $posts = $url_user_arg->posts->simplePaginate();
-        $posts = Post::whereIn('user_id', $url_user_arg)->latest()->simplePaginate(15);
-//        dd($requested_user->name);
-//        dd($url_user_arg);
+        $user = auth()->user()->id;
+        $posts = Post::where('user_id', $user)->latest()->simplePaginate(15);
         return view('users.index', compact('requested_user', 'url_user_arg', 'posts'));
     }
 
