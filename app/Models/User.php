@@ -44,8 +44,8 @@ class User extends Authenticatable
     ];
 
     public function profileImage(){
-        $imagePath = ($this->image) ? $this->image : 'noimage.png';
-        return "/storage/" . $imagePath;
+        $imagePath = ($this->image) ? "/storage/".$this->image : 'https://drive.google.com/thumbnail?id=1u_tJCaxx2tjTunpiW36T-6eC88rleGgO';
+        return $imagePath;
     }
 
     public function posts(){

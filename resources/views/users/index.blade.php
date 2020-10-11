@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <div>
-                    <img src="{{ $user->profileImage()  }}" alt="" style="width: 300px">
+                    <img src="{{ $user->profileImage()  }}" alt="" style="width: 300px; height: 300px">
                 </div>
             </div>
             <div class="col-sm-8">
