@@ -10,6 +10,9 @@ use Intervention\Image\Facades\Image;
 
 class UsersController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth')->only('edit');
+    }
     public function index(Request $request, $user_id)
     {
         $requested_user = $request->user();
