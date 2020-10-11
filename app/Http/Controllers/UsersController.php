@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Intervention\Image\Facades\Image;
 
 class UsersController extends Controller
 {
@@ -33,10 +34,20 @@ class UsersController extends Controller
         $imagePath = '';
         if(request('image')){
             $imagePath = request('image')->store('profiles', 'public');
+            $this->resizeImage400($imagePath);
         }
 //        dd(auth()->user());
         auth()->user()->update(array_merge($data, ['image' => $imagePath]));
 
         return redirect("/user/{$user->id}");
+    }
+
+
+    // Resize image with width 400 and keep height aspect ratio
+    private function resizeImage400($imagePath){
+        $image = Image::make(public_path("storage/$imagePath"))->resize(400, null, function ($constraint){
+            $constraint->aspectRatio();
+        });
+        $image->save();
     }
 }

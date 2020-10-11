@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 
 class PostsController extends Controller
 {
@@ -46,9 +47,11 @@ class PostsController extends Controller
             'image' => 'image'
         ]);
 
+        // image saving in the storage
         $imagePath = '';
         if(isset($data['image'])){
             $imagePath = $data['image']->store('posts_image', 'public');
+            $this->resizeImage400($imagePath);
         }
 
         $request->user()->posts()->create([
@@ -70,7 +73,6 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-//        dd('ahad');
         $comments = $post->comments;
         return view('posts.show', compact('post', 'comments'));
     }
@@ -105,16 +107,17 @@ class PostsController extends Controller
         ]);
 
         if(isset($data['image'])){
+            // when database have a existing image
             if($post->image){
-//                dd($post->image);
                 $storage_path = storage_path();
                 $old_image_path = "$storage_path/app/public/$post->image";
-//                dd($old_image_path);
                 if(File::exists($old_image_path)){
                     File::delete($old_image_path);
                 }
             }
+            // image saving in the storage
             $imagePath = $data['image']->store('posts_image', 'public');
+            $this->resizeImage400($imagePath);
             $post->update([
                 'title' => $data['title'],
                 'content' => $data['content'],
@@ -122,10 +125,9 @@ class PostsController extends Controller
             ]);
         }
         else{
-//            dd('image not added');
             $post->update($data);
         }
-//        dd($data);
+
         return redirect("/posts/$post->id/edit")->with('success', "Post Updated.");
     }
 
@@ -139,6 +141,8 @@ class PostsController extends Controller
     {
         $this->authorize('delete', $post);
         $post_user = $post->user->id;
+
+        // deleting image when image exist
         if(isset($post->image)){
             $storage_path = storage_path();
             $old_image_path = "$storage_path/app/public/$post->image";
@@ -148,5 +152,13 @@ class PostsController extends Controller
         }
         $post->delete();
         return redirect("/user/$post_user")->with('success', 'Post Deleted.');
+    }
+
+    // Resize image with width 400 and keep height aspect ratio
+    private function resizeImage400($imagePath){
+        $image = Image::make(public_path("storage/$imagePath"))->resize(400, null, function ($constraint){
+            $constraint->aspectRatio();
+        });
+        $image->save();
     }
 }
