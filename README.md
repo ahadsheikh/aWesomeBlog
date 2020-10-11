@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## Simple  CRUD Project by Laravel<br>
 Live here [aWesomeBlog](http://awesomeblog7.herokuapp.com/)
 <hr>
