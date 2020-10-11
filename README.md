@@ -1,8 +1,5 @@
 <<<<<<< HEAD
 ## Simple  CRUD Project by Laravel<br>
-=======
-##Simple  CRUD Project by Laravel<br>
->>>>>>> c53e8d87548267117ca10dc46b904b09996f1dd8
 Live here [aWesomeBlog](http://awesomeblog7.herokuapp.com/)
 <hr>
 
